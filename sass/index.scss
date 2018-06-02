@@ -1,0 +1,245 @@
+@import "config";
+.header{
+    display: flex;
+    flex-direction: column;
+    &__logotipo{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FB4554;
+        height: 64px;
+        z-index: 30;
+        .logotipo{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: .5rem 1rem;
+            
+            &__title{
+                color: #F0F0F0;
+                font-size: 1.3em;
+                font-weight: 600;
+                letter-spacing: .5px;
+                margin-left: .2em;
+            }
+        }
+
+        .toggle{
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            z-index: 10;
+            &__icon{
+                position: relative;
+                    z-index: 300;
+                    width: 30px;
+                    height: 20px;
+                    box-shadow: inset 0 4px #FFF;
+                    cursor: pointer;
+                    -webkit-box-flex: 0;
+                    -ms-flex: none;
+                    flex: none;
+                    margin-left: 1em;
+                    &:before,&:after{
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        height: 4px;
+                        background-color: #FFF;
+                        bottom: 0;
+                        transition-duration: .5s;
+                    }
+                    &:after{
+                        bottom: 8px;
+                    }
+            }
+            @include desktop {
+                display: none;
+            }
+        }
+        @include desktop{
+            justify-content: center;
+            align-items: initial;
+            .logotipo{
+                height: auto;
+                align-items: initial;
+                width: 128px;
+                height: 128px;
+                padding: .5em 0;
+                &__title{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &__nav{
+        background-color: #EFECE7;
+        border-bottom: solid 5px #D8A236;
+        transition-duration: .5s;
+        position: absolute;
+        width: 100%;
+        top: -100%;
+        z-index: 20;
+        &__container{
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+        }
+
+        &__item{
+            margin-bottom: 0;
+            position: relative;
+            a{
+                text-decoration: none;
+                color: #35373C;
+                display: block;
+                border-bottom: 1px solid hsla(180,2%,88%,.4);
+                font-size: 1.2em;
+                font-weight: bold;
+                letter-spacing: 1px;
+                padding: .8em 1em;
+            }
+
+            &:hover{
+                background: #f5f5f5;
+            }
+
+            &.active{
+                a{
+                    color: #D25059;
+                }
+            }
+        }
+    
+        &.active{
+            top: 64px;
+        }
+
+        @include desktop {
+            position: initial;
+            padding-top: 54px;
+            &__container{
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    }
+}
+@function makelongshadow($color) {
+    $val: 0px 0px $color;
+    @for $i from 1 through 50 {
+      $val: #{$val}, #{$i}px #{$i}px #{$color};
+    }
+    @return $val;
+  }
+
+.main{
+    &__background{
+        display: flex;
+        position: relative;
+        background-image: url('../image/edificio.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 350px;
+        justify-content: center;
+        align-items: center;
+        &::before{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        &__title{
+            color: #E5E2DD;
+            z-index: 10;
+            font-size: 9em;
+            font-style: italic;
+        }
+    }
+
+    &__article{
+        background-color: #EFECE7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 30px;
+        .article{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1em .5em;
+            max-width: 350px;
+            &__img{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 150px;
+                height: 150px;
+                border: solid 3px #EFECE7;
+                border-radius: 50%;
+                overflow: hidden;
+                i{
+                    color: #FFFFFF;
+                    font-size: 4em;
+                }
+                &--red{
+                    background-color: #FB4554;
+                    i{
+                        text-shadow: makelongshadow(rgb(211, 62, 74));
+                    }
+                }
+
+                &--green{
+                    background-color: #F8A509;
+                    i{
+                        text-shadow: makelongshadow(rgb(223, 155, 8));
+                    }
+                }
+
+                &--blue{
+                    background-color: #01B0CD;
+                    i{
+                        text-shadow: makelongshadow(rgb(5, 161, 189));
+                    }
+                }
+            }
+            &__title{
+                font-family: sans-serif;
+                font-size: 1.8em;
+                font-weight: 700;
+                padding: .5em 0;
+                text-transform: uppercase;
+                text-align: center;
+            }
+            &__content{
+                color: #A7A8A3;
+                font-size: .8em;
+                text-align: center;
+            }
+        }
+    }
+
+    @include desktop{
+        &__article{
+            flex-direction: row;
+            margin-top: -88px;
+            .article{
+                &__img{
+                    z-index: 10;
+                }
+                &__content{
+                    font-size: .9em;
+                    padding: 0 .5em;
+                }
+            }
+        }
+    }
+}
